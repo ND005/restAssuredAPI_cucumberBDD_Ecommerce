@@ -1,7 +1,0 @@
-<project>
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>restAssuredAPI_cucumberBDD_Ecommerce</groupId>
-  <artifactId>restAssuredAPI_cucumberBDD_Ecommerce</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <description>Rest Assured - API &amp; Cucumber BDD (Git package name :- restAssuredAPI_cucumberBDD_Ecommerce)</description>
-</project>
