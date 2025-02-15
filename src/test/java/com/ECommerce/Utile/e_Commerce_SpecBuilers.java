@@ -1,10 +1,8 @@
 package com.ECommerce.Utile;
 
 import static io.restassured.RestAssured.given;
-
 import com.ECommerce.POJO.loginRequest;
 import com.ECommerce.POJO.loginResponce;
-
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
