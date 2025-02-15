@@ -1,7 +1,36 @@
 <project>
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>restAssuredAPI_cucumberBDD_Ecommerce</groupId>
-  <artifactId>restAssuredAPI_cucumberBDD_Ecommerce</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <description>Rest Assured - API &amp; Cucumber BDD (Git package name :- restAssuredAPI_cucumberBDD_Ecommerce)</description>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>restAssuredAPI_cucumberBDD_Ecommerce</groupId>
+	<artifactId>restAssuredAPI_cucumberBDD_Ecommerce</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<description>Rest Assured - API &amp; Cucumber BDD (Git package name :-
+		restAssuredAPI_cucumberBDD_Ecommerce)</description>
+	<dependencies>
+		<!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>rest-assured</artifactId>
+			<version>5.5.0</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
+		<dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-java</artifactId>
+			<version>7.21.1</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-junit -->
+		<dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-junit</artifactId>
+			<version>7.21.1</version>
+			<scope>test</scope>
+		</dependency>
+		<!--https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.18.2</version>
+		</dependency>
+	</dependencies>
 </project>
