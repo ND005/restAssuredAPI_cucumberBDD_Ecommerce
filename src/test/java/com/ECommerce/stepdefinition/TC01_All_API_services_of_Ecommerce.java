@@ -1,8 +1,6 @@
 package com.ECommerce.stepdefinition;
 
 import static io.restassured.RestAssured.given;
-
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
