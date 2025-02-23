@@ -2,6 +2,7 @@ package com.ECommerce.stepdefinition;
 
 import static io.restassured.RestAssured.given;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
@@ -21,7 +22,7 @@ public class TC01_All_API_services_of_Ecommerce extends e_Commerce_SpecBuilers {
 	orderDetailsResponce OrderDetailsResp = null;
 
 	@Given("^Login to access server and create access token for (.*) and (.*)$")
-	public void login_to_access_server_and_create_access_token(String userID, String Password) {
+	public void login_to_access_server_and_create_access_token(String userID, String Password) throws IOException {
 		loginRequest LogReq = new loginRequest();
 		LogReq.setUserEmail(userID);
 		LogReq.setUserPassword(Password);
@@ -32,15 +33,16 @@ public class TC01_All_API_services_of_Ecommerce extends e_Commerce_SpecBuilers {
 				loginResp.getToken() != null && loginResp.getUserId() != null);
 	}
 
-	@When("^Add the product in application with (.*),(.*) and (.*)$")
+	@When("^Add the product in application with (.*),(.*),(.*) and (.*)$")
 	public void add_the_product_in_application_with_productName_productPrice_and_productDescription(String productName,
-			String productPrice, String productDescription) {
+			String productPrice, String productDescription,String Imgdetails) throws IOException {
 		RequestSpecification addProductinSite = given().spec(SpecificationswithToken(loginResp.getToken()))
 				.param("productName", productName).param("productAddedBy", loginResp.getUserId().toString())
 				.param("productSubCategory", "fashion").param("productCategory", "shoes")
 				.param("productPrice", productPrice).param("productDescription", productDescription)
 				.param("productFor", "men")
-				.multiPart("productImage", new File(new java.io.File("").getAbsolutePath() + "/pumaShoes.png"));
+				.multiPart("productImage", new File(new java.io.File("").getAbsolutePath() + "/"+Imgdetails+".png"));
+		
 		CreateProductResp = addProductinSite.when().post("/api/ecom/product/add-product").then().extract()
 				.as(createProductResponce.class);
 		System.out.println("  [INFO] - " + CreateProductResp.getProductId());
@@ -49,7 +51,7 @@ public class TC01_All_API_services_of_Ecommerce extends e_Commerce_SpecBuilers {
 	}
 
 	@Then("Verify the product details with given details")
-	public void verify_the_product_details_with_given_details() {
+	public void verify_the_product_details_with_given_details() throws IOException {
 		createProductSubRequest SubRequest = new createProductSubRequest();
 		SubRequest.setCountry("India");
 		SubRequest.setProductOrderedId(CreateProductResp.getProductId().toString());
@@ -73,7 +75,7 @@ public class TC01_All_API_services_of_Ecommerce extends e_Commerce_SpecBuilers {
 
 	@And("^Verify the order details with (.*),(.*) and (.*)$")
 	public void verify_the_order_details_with_given_details(String productName, String productPrice,
-			String productDescription) {
+			String productDescription) throws IOException {
 		OrderDetailsResp = given()
 				.spec(SpecificationswithTokenandQPM(loginResp.getToken(),
 						CreateOrderResp.getOrders().get(0).toString()))
