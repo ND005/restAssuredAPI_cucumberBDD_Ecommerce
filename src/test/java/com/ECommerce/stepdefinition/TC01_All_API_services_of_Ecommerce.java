@@ -36,9 +36,10 @@ public class TC01_All_API_services_of_Ecommerce extends e_Commerce_SpecBuilers {
 	public void add_the_product_in_application_with_productName_productPrice_and_productDescription(String productName,
 			String productPrice, String productDescription) {
 		RequestSpecification addProductinSite = given().spec(SpecificationswithToken(loginResp.getToken()))
-				.param("productName", "Jaguar Shoes").param("productAddedBy", loginResp.getUserId().toString())
-				.param("productSubCategory", "fashion").param("productCategory", "shoes").param("productPrice", "6969")
-				.param("productDescription", "Puma Nike Jaguar").param("productFor", "men")
+				.param("productName", productName).param("productAddedBy", loginResp.getUserId().toString())
+				.param("productSubCategory", "fashion").param("productCategory", "shoes")
+				.param("productPrice", productPrice).param("productDescription", productDescription)
+				.param("productFor", "men")
 				.multiPart("productImage", new File(new java.io.File("").getAbsolutePath() + "/pumaShoes.png"));
 		CreateProductResp = addProductinSite.when().post("/api/ecom/product/add-product").then().extract()
 				.as(createProductResponce.class);
@@ -66,12 +67,13 @@ public class TC01_All_API_services_of_Ecommerce extends e_Commerce_SpecBuilers {
 				.as(createOrderResponce.class);
 		System.out.println("  [INFO] [PRODUCT ORDER ID] - " + CreateOrderResp.getProductOrderId().get(0));
 		System.out.println("  [INFO] [PRODUCT ORDER] - " + CreateOrderResp.getOrders().get(0));
-		Assert.assertTrue(" [ERROR - Delete level - Unable to delete product] ",
+		Assert.assertTrue(" [ERROR - Product details - Unable to verify product details] ",
 				CreateOrderResp.getProductOrderId().get(0).toString() != null);
 	}
 
-	@And("Verify the order details with given details")
-	public void verify_the_order_details_with_given_details() {
+	@And("^Verify the order details with (.*),(.*) and (.*)$")
+	public void verify_the_order_details_with_given_details(String productName, String productPrice,
+			String productDescription) {
 		OrderDetailsResp = given()
 				.spec(SpecificationswithTokenandQPM(loginResp.getToken(),
 						CreateOrderResp.getOrders().get(0).toString()))
@@ -79,6 +81,8 @@ public class TC01_All_API_services_of_Ecommerce extends e_Commerce_SpecBuilers {
 		Assert.assertTrue(" [ERROR - Order details - Error while verifing the order] - ",
 				OrderDetailsResp.getData().getOrderById() != null);
 		System.out.println("  [INFO] [ORERED BY ID] - " + OrderDetailsResp.getData().getOrderById());
+		Assert.assertTrue(" [ERROR - Order details not matching  - Product Name]", OrderDetailsResp.getData().getProductName().contains(productName));
+		Assert.assertTrue(" [ERROR - Order details not matching  - Product Price]", OrderDetailsResp.getData().getOrderPrice().contains(productPrice));
 	}
 
 	@And("Delete the added product from E-commerce service")
@@ -89,7 +93,7 @@ public class TC01_All_API_services_of_Ecommerce extends e_Commerce_SpecBuilers {
 			DeleteProductResp = given()
 					.spec(DeletedSpecificationswithToken(loginResp.getToken(), CreateProductResp.getProductId())).when()
 					.delete("/api/ecom/product/delete-product/{PRODUCTID}").then().extract().as(deleteResponce.class);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			System.out.println("  [INFO] [DELETE ORDER] - " + e.toString());
 		}
 		Assert.assertTrue(" [ERROR - Delete level - Unable to delete product] ",

@@ -4,7 +4,7 @@ Feature: Test Case 01 - Verify all API services of E-Commerce application
     Given Login to access server and create access token for <User ID> and <Password>
     When Add the product in application with <Product Name>,<Product Price> and <Product Description>
     Then Verify the product details with given details
-    And Verify the order details with given details
+    And Verify the order details with <Product Name>,<Product Price> and <Product Description>
     And Delete the added product from E-commerce service
 
     Examples: 
