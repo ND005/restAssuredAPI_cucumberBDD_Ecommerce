@@ -9,7 +9,6 @@ import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 
 public class e_Commerce_SpecBuilers {
-
 	public static RequestSpecification loginSpecifications() throws IOException {
 		RequestSpecification RequestSpec = new RequestSpecBuilder().setBaseUri(globalData("baseURL"))
 				.setContentType(ContentType.JSON).build();
