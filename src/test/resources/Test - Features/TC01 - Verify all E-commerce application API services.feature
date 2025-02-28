@@ -1,3 +1,4 @@
+@E-Commerce
 Feature: Test Case 01 - Verify all API services of E-Commerce application
 
   Scenario Outline: Verify all API services of E-commerce appliction like Login to Access server, Get token, Add product, Order the product and Delete the product
