@@ -1,0 +1,14 @@
+mutation {
+  createLocation(location: {name: "Gotham City", type: "Fictional", dimension: "100Sq KM"}) {
+    id
+  }
+  createCharacter(character: {name: "Bat Man", type: "Hero", status: "Alive", species: "Human", gender: "Male", image: "NA", originId: 18927, locationId: 18927}) {
+    id
+  }
+  createEpisode(episode: {name: "Dark Day", air_date: "8-March-2025", episode: "007"}) {
+    id
+  }
+  associateEpisodeCharacter(episodeId: 13356, characterId: 12983) {
+    status
+  }
+}
