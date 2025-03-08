@@ -6,7 +6,7 @@ Feature: Web series - GraphQL data service API
     #Prepare the GQL Mutaion with data
     And Create createLocation data using <LocationName>,<LocationType> and <LocationDimension> of the character
     And Create createCharacter data using <CharacterName>,<CharacterType>,<CharacterStatus>,<CharecterSpecies>,<CharecterGender>,CharecterImage,OriginId and LocationId of the character
-    And Create createEpisode data using <EpisodeName>,<EpisodeAirDate>,<EpisodeID> of the episode
+    And Create createEpisode data using <EpisodeName>,<EpisodeAirDate> and <EpisodeID> of the episode
     Then Associate the episode and character using associateEpisodeCharacter GQL
     And Verify the file created with createLocationID,createCharacterID and createEpisodeID
 
