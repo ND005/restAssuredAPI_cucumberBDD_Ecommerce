@@ -48,6 +48,7 @@ public class TC02_TS01_Verify_data_mutation_process_GraphQL {
 	@And("^Create createLocation data using (.*),(.*) and (.*) of the character$")
 	public void create_location_data_using_city_type_dimention_of_the_character(String cityName, String cityType,
 			String cityDimention) {
+		// create a POJO(Plain Old Java Object)
 		System.out.println("cityName : '"+cityName+"'");
 		System.out.println("cityType : '"+cityType+"'");
 		System.out.println("cityDimention : '"+cityDimention+"'");
