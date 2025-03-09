@@ -1,22 +1,48 @@
 package com.ECommerce.stepdefinition;
-
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import org.junit.Assert;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class TC02_TS01_All_API_services_GraphQL {
-
+public class TC02_TS01_Verify_data_mutation_process_GraphQL {
+	
 	@Given("Verify the mutation data file and truncate the old file")
 	public void verify_the_mutation_data_file() {
-		// Verify mutation data the file in present folder
-		// if(file exist){delete the file}
+		try {
+			String path = new java.io.File("").getAbsolutePath() + "\\dataProp.txt";
+			Path datafile = Paths.get(path);
+			Thread.sleep(2000);
+			if(Files.exists(datafile)) {
+				Files.delete(datafile);
+				Thread.sleep(2000);
+				System.out.println("  [INFO] TC02-TS01: Data Properties File Deleted");
+			}else {System.out.println("  [INFO] TC02-TS01: Data Properties File !Exist");}
+		}
+		catch (Exception e) {
+			System.out.println(" [ERROR] TC02-TS01: Data Mutation : "+e.toString());
+		}
 	}
 	
 	@When("Create the data file and intiate the process")
-	public void create_the_data_file_and_initiate() {
-		// Verify mutation data the file in present folder
-		// if(file exist){delete the file}
+	public void create_the_data_file_and_initiate() throws Throwable {
+		String path = new java.io.File("").getAbsolutePath() + "\\dataProp.txt";
+		try {
+			Path datafile = Paths.get(path);
+			Thread.sleep(2000);
+			if(!Files.exists(datafile)) {
+				Files.createFile(datafile);
+				Thread.sleep(2000);
+				System.out.println("  [INFO] TC02-TS01: Data Properties File Created");
+				Assert.assertTrue(Files.exists(datafile));
+			}
+		}
+		catch (Exception e) {
+			System.out.println(" [ERROR] TC02-TS01: Data Mutation : "+e.toString());
+		}
 	}
 
 	@And("^Create createLocation data using (.*),(.*) and (.*) of the character$")

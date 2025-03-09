@@ -19,9 +19,9 @@ Feature: Web series - GraphQL data service API
     Given Verify the query data file and intiate the process
     When Procced the GQL flow based on data create through mutation
     Then Verify location data :<LocationName>,<LocationType> and <LocationDimension>
-    Then Verify charactar data :<CharacterName>,<CharacterType>,<CharacterStatus>,<CharecterSpecies> and <CharecterGender>
+    Then Verify charactar data :<CharactarName>,<CharactarType>,<CharactarStatus>,<CharactarSpecies> and <CharactarGender>
     Then Verify episode data :<EpisodeName>,<EpisodeAirDate> and <EpisodeID>
 
     Examples: 
-      | LocationName | LocationType | LocationDimension | CharacterName | CharacterType | CharacterStatus | CharecterSpecies | CharecterGender | EpisodeName | EpisodeAirDate | EpisodeID |
+      | LocationName | LocationType | LocationDimension | CharactarName | CharactarType | CharactarStatus | CharactarSpecies | CharactarGender | EpisodeName | EpisodeAirDate | EpisodeID |
       | Goutham City | Fictional    | 100Sq KM          | Bat Man       | Hero          | Alive           | Human            | Male            | Dark Born   | 05-Jan-1998    |       007 |
