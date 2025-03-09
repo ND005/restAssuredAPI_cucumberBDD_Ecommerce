@@ -3,11 +3,18 @@ package com.ECommerce.stepdefinition;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 
-public class TC02_All_API_services_GraphQL {
+public class TC02_TS01_All_API_services_GraphQL {
 
-	@Given("Verify the mutation data file and intiate the process")
-	public void verify_the_mutation_data_file_and_intiate_the_process() {
+	@Given("Verify the mutation data file and truncate the old file")
+	public void verify_the_mutation_data_file() {
+		// Verify mutation data the file in present folder
+		// if(file exist){delete the file}
+	}
+	
+	@When("Create the data file and intiate the process")
+	public void create_the_data_file_and_initiate() {
 		// Verify mutation data the file in present folder
 		// if(file exist){delete the file}
 	}
