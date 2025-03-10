@@ -18,8 +18,15 @@ public class mutationRequests {
 	}
 
 	public String createEpisode(String EpisodeName, String EpisodeAirDate, String EpisodeID) {
-		String Body = "mutation{createEpisode(episode: {name: \"" + EpisodeName + "\", air_date: \"" + EpisodeAirDate
-				+ "\", episode: \"" + EpisodeID + "\"}) {id}}";
+		String Body = "{\"query\":\"mutation {\\n  createEpisode(episode: {name: \\\"" + EpisodeName
+				+ "\\\", air_date: \\\"" + EpisodeAirDate + "\\\", episode: \\\"" + EpisodeID
+				+ "\\\"}) {\\n    id\\n  }\\n}\\n\",\"variables\":null}";
+		return Body;
+	}
+
+	public String associateCharecterLocation(String episodeID, String charactarID) {
+		String Body = "{\"query\":\"mutation {\\n  associateEpisodeCharacter(episodeId: " + episodeID
+				+ ", characterId: " + charactarID + ") {\\n    status\\n  }\\n}\\n\",\"variables\":null}";
 		return Body;
 	}
 }
