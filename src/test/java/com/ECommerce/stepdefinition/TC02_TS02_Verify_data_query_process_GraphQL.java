@@ -27,7 +27,7 @@ public class TC02_TS02_Verify_data_query_process_GraphQL {
 		Path datafile = Paths.get(path);
 		try {
 			if (Files.exists(datafile)) {
-				Assert.assertTrue("  [INFO]: Query characterData file not exist", true);
+				Assert.assertTrue("  [INFO]: Query Data file not exist", true);
 			}
 		} catch (Exception e) {
 			System.err.println("Exception: " + e.getMessage());
@@ -57,19 +57,22 @@ public class TC02_TS02_Verify_data_query_process_GraphQL {
 	@Then("^Verify location data :(.*),(.*) and (.*)$")
 	public void verify_location_data_LocationName_LocationType_and_LocationDimension(String LocationName,
 			String LocationType, String LocationDimension) {
+
+		marvelLocationData locResp = given().header("content-Type", "application/json")
+				.body(GQL.locationData(locatioID)).when().post("https://rahulshettyacademy.com/gq/graphql").then()
+				.extract().as(marvelLocationData.class);
+
+		Assert.assertTrue(locResp.getData().getLocation().getName().contains(LocationName));
+		Assert.assertTrue(locResp.getData().getLocation().getType().contains(LocationType));
+		Assert.assertTrue(locResp.getData().getLocation().getDimension().contains(LocationDimension));
 		/*
-		 * marvelLocationData locResp = given().header("content-Type",
-		 * "application/json") .body(GQL.locationData(locatioID)).when().post(
-		 * "https://rahulshettyacademy.com/gq/graphql").then()
-		 * .extract().as(marvelLocationData.class);
-		 * Assert.assertTrue(locResp.getLocationData().getLocation().getName().contains(
-		 * LocationName));
-		 * Assert.assertTrue(locResp.getLocationData().getLocation().getType().contains(
-		 * LocationType));
-		 * Assert.assertTrue(locResp.getLocationData().getLocation().getDimension().
-		 * contains(LocationDimension));
-		 * Assert.assertTrue(locResp.getLocationData().getLocation().getCreated() !=
-		 * null); System.out.println("  [STEP:PASSED]");
+		 * System.out.println( "  [INFO] ACTUAL:" +
+		 * locResp.getData().getLocation().getName() + " - Expected:" + LocationName);
+		 * System.out.println( "  [INFO] ACTUAL:" +
+		 * locResp.getData().getLocation().getType() + " - Expected:" + LocationType);
+		 * System.out.println("  [INFO] ACTUAL:" +
+		 * locResp.getData().getLocation().getDimension() + " - Expected:" +
+		 * LocationDimension); System.out.println("  [STEP:PASSED]");
 		 */
 	}
 
@@ -81,17 +84,30 @@ public class TC02_TS02_Verify_data_query_process_GraphQL {
 		marvalCharecterData ReqResp = given().header("content-Type", "application/json")
 				.body(GQL.charactarData(charactarID)).when().post("https://rahulshettyacademy.com/gq/graphql").then()
 				.extract().as(marvalCharecterData.class);
-
+		/*
+		 * System.out.println( "  [INFO] ACTUAL:" +
+		 * ReqResp.getData().getCharacter().getName() + " - Expected:" + CharactarName);
+		 * System.out.println( "  [INFO] ACTUAL:" +
+		 * ReqResp.getData().getCharacter().getType() + " - Expected:" + CharactarType);
+		 * System.out.println( "  [INFO] ACTUAL:" +
+		 * ReqResp.getData().getCharacter().getStatus() + " - Expected:" +
+		 * CharactarStatus); System.out.println( "  [INFO] ACTUAL:" +
+		 * ReqResp.getData().getCharacter().getSpecies() + " - Expected:" +
+		 * CharactarSpecies); System.out.println( "  [INFO] ACTUAL:" +
+		 * ReqResp.getData().getCharacter().getGender() + " - Expected:" +
+		 * CharactarGender);
+		 */
 		Assert.assertTrue("  [ERROR] Character Name : " + ReqResp.getData().getCharacter().getName(),
 				ReqResp.getData().getCharacter().getName().contains(CharactarName));
 		Assert.assertTrue("  [ERROR] Character Type : " + ReqResp.getData().getCharacter().getType(),
 				ReqResp.getData().getCharacter().getType().contains(CharactarType));
 		Assert.assertTrue("  [ERROR] Character Status : " + ReqResp.getData().getCharacter().getStatus(),
 				ReqResp.getData().getCharacter().getStatus().contains(CharactarStatus));
-		//Assert.assertTrue("  [ERROR] Character Species : " + ReqResp.getData().getCharacter().getSpecies(),
-				//ReqResp.getData().getCharacter().getSpecies().contains(CharactarSpecies));
+		Assert.assertTrue("  [ERROR] Character Species : " + ReqResp.getData().getCharacter().getSpecies(),
+				ReqResp.getData().getCharacter().getSpecies().contains(CharactarSpecies));
 		Assert.assertTrue("  [ERROR] Character Gender : " + ReqResp.getData().getCharacter().getGender(),
 				ReqResp.getData().getCharacter().getGender().contains(CharactarGender));
+
 		System.out.println("  [STEP:PASSED]");
 	}
 
@@ -100,7 +116,6 @@ public class TC02_TS02_Verify_data_query_process_GraphQL {
 
 		marvalEpisodeData Req = given().header("content-Type", "application/json").body(GQL.episodeData(episodeID))
 				.when().post("https://rahulshettyacademy.com/gq/graphql").then().extract().as(marvalEpisodeData.class);
-
 		Assert.assertTrue(" [ERROR] Episode Name : " + Req.getEpisodeData().getEpisode().getName(),
 				Req.getEpisodeData().getEpisode().getName().contains(EpisodeName));
 		Assert.assertTrue(" [ERROR] Episode Air Date : " + Req.getEpisodeData().getEpisode().getAir_date(),
@@ -108,5 +123,6 @@ public class TC02_TS02_Verify_data_query_process_GraphQL {
 		Assert.assertTrue(" [ERROR] Episode ID : " + Req.getEpisodeData().getEpisode().getId(),
 				Req.getEpisodeData().getEpisode().getId() > 0);
 		System.out.println("  [STEP:PASSED]");
+
 	}
 }

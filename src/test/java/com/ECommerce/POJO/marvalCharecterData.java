@@ -1,13 +1,12 @@
 package com.ECommerce.POJO;
 public class marvalCharecterData {
-	private characterData characterData;
+	private characterData data;
 
 	public characterData getData() {
-		return characterData;
+		return data;
 	}
 
-	public void setData(characterData characterData) {
-		this.characterData = characterData;
+	public void setData(characterData data) {
+		this.data = data;
 	}
-
 }

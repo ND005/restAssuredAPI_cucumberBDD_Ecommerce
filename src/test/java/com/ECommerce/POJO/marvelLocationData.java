@@ -1,13 +1,15 @@
 package com.ECommerce.POJO;
 
 public class marvelLocationData {
-	private locationData locationData;
+	private locationData data;
 
-	public locationData getLocationData() {
-		return locationData;
+	public locationData getData() {
+		return data;
 	}
 
-	public void setLocationData(locationData locationData) {
-		this.locationData = locationData;
+	public void setData(locationData data) {
+		this.data = data;
 	}
+
+   
 }

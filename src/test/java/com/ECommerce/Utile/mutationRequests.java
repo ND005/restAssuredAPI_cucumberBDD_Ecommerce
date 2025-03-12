@@ -9,10 +9,10 @@ public class mutationRequests {
 	}
 
 	public String createCharacter(String CharacterName, String CharacterType, String CharacterStatus,
-			String CharecterSpecies, String CharecterGender, String originId, String locationId) {
+			String CharacterSpecies, String CharacterGender, String originId, String locationId) {
 		String Body = "{\"query\":\"mutation {\\n  createCharacter(character: {name: \\\"" + CharacterName
 				+ "\\\", type: \\\"" + CharacterType + "\\\", status: \\\"" + CharacterStatus + "\\\", species: \\\""
-				+ CharacterStatus + "\\\", gender: \\\"" + CharacterStatus + "\\\", image: \\\"NA\\\", originId:"
+				+ CharacterSpecies + "\\\", gender: \\\"" + CharacterGender + "\\\", image: \\\"NA\\\", originId:"
 				+ originId + ", locationId: " + locationId + "}) {\\n    id\\n  }\\n}\\n\",\"variables\":null}";
 		return Body;
 	}

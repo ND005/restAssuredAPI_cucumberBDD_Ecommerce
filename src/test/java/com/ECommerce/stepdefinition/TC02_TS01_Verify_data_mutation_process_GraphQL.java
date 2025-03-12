@@ -23,12 +23,14 @@ public class TC02_TS01_Verify_data_mutation_process_GraphQL {
 	public void verify_the_mutation_data_file() {
 		try {
 			Path datafile = Paths.get(path);
-			Thread.sleep(2000);
+			Thread.sleep(1000);
 			if (Files.exists(datafile)) {
 				Files.delete(datafile);
-				Thread.sleep(2000);
-				// System.out.println(" [INFO] TC02-TS01: Data Properties File Deleted");
-			} // else {System.out.println(" [INFO] TC02-TS01: Data Properties File !Exist");}
+				Thread.sleep(1000);
+				// System.out.println(" [INFO] TC02-TS01: locationData Properties File
+				// Deleted");
+			} // else {System.out.println(" [INFO] TC02-TS01: locationData Properties File
+				// !Exist");}
 		} catch (Exception e) {
 			System.err.println("Exception: " + e.getMessage());
 		}
@@ -61,7 +63,7 @@ public class TC02_TS01_Verify_data_mutation_process_GraphQL {
 				.body(mutData.createLocation(LocationName, LocationType, LocationDimension)).when()
 				.post("https://rahulshettyacademy.com/gq/graphql").then().extract().response().asString();
 
-		// Data service
+		// locationData service
 		JsonPath JS = new JsonPath(LocationId);
 		try {
 			String filename = path;
@@ -75,7 +77,7 @@ public class TC02_TS01_Verify_data_mutation_process_GraphQL {
 	}
 
 	@And("^Create createCharacter data using (.*),(.*),(.*),(.*),(.*),CharecterImage,OriginId and LocationId of the character$")
-	public void create_character_data_using_Name_Type_Status_Species_Gender_origin_and_location_of_the_character(
+	public void create_character_data_using_Name_Type_Status_Species_Gender_origin_and_location_of_character(
 			String charactarName, String charatarType, String charactarStatus, String charecterSpecies,
 			String charecterGender) {
 
@@ -96,7 +98,7 @@ public class TC02_TS01_Verify_data_mutation_process_GraphQL {
 							charecterGender, locID, locID))
 					.when().post("https://rahulshettyacademy.com/gq/graphql").then().extract().response().asString();
 
-			// Data service
+			// locationData service
 			JsonPath JS = new JsonPath(charecteId);
 			String filename = path;
 			FileWriter fw = new FileWriter(filename, true);
@@ -118,7 +120,7 @@ public class TC02_TS01_Verify_data_mutation_process_GraphQL {
 					.body(mutData.createEpisode(EpisodeName, EpisodeAirDate, EpisodeID)).when()
 					.post("https://rahulshettyacademy.com/gq/graphql").then().extract().response().asString();
 
-			// Data service
+			// locationData service
 			JsonPath JS = new JsonPath(EpisodeId);
 
 			String filename = path;
@@ -155,8 +157,7 @@ public class TC02_TS01_Verify_data_mutation_process_GraphQL {
 
 			String filename = path;
 			FileWriter fw = new FileWriter(filename, true);
-			fw.write("associateEpisodeCharacterStatus:" + JS.getString("Data.associateEpisodeCharacter.status")
-					+ "\n");
+			fw.write("associateEpisodeCharacterStatus:" + JS.getString("data.associateEpisodeCharacter.status") + "\n");
 			fw.close();
 
 			Assert.assertTrue(JS.getString("data.associateEpisodeCharacter.status").contains("1"));
