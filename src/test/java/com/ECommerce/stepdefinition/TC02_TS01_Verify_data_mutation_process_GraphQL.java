@@ -1,25 +1,21 @@
 package com.ECommerce.stepdefinition;
 
 import java.io.FileWriter;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-
 import org.junit.Assert;
-
 import com.ECommerce.Utile.mutationRequests;
-
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.path.json.JsonPath;
-
 import static io.restassured.RestAssured.*;
 
 public class TC02_TS01_Verify_data_mutation_process_GraphQL {
+
 	mutationRequests mutData = new mutationRequests();
 	private String path = new java.io.File("").getAbsolutePath() + "\\dataProp.txt";
 
@@ -159,7 +155,8 @@ public class TC02_TS01_Verify_data_mutation_process_GraphQL {
 
 			String filename = path;
 			FileWriter fw = new FileWriter(filename, true);
-			fw.write("associateEpisodeCharacterStatus:" + JS.getString("data.associateEpisodeCharacter.status") + "\n");
+			fw.write("associateEpisodeCharacterStatus:" + JS.getString("Data.associateEpisodeCharacter.status")
+					+ "\n");
 			fw.close();
 
 			Assert.assertTrue(JS.getString("data.associateEpisodeCharacter.status").contains("1"));
@@ -171,7 +168,7 @@ public class TC02_TS01_Verify_data_mutation_process_GraphQL {
 
 	@And("Verify the file created with createLocationID,createCharacterID and createEpisodeID")
 	public void verify_the_file_created_with_create_location_id_create_character_id_and_create_episode_id() {
-		// File data validation
+		// File characterData validation
 		try {
 			boolean charecterID = false;
 			boolean episodeID = false;
@@ -186,10 +183,8 @@ public class TC02_TS01_Verify_data_mutation_process_GraphQL {
 					locationID = true;
 				}
 			}
-
 			Assert.assertTrue("  [ERROR] : one of the ID not in dataProp.txt file",
 					charecterID && episodeID && locationID);
-
 		} catch (Exception e) {
 			System.err.println("IOException: " + e.getMessage());
 		}

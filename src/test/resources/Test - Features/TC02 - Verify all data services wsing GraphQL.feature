@@ -1,4 +1,4 @@
-@GQL
+@GML
 Feature: Web series - GraphQL data service API
 
   Scenario Outline: TS01 - Verify mutation process of Graph QL data service
@@ -14,7 +14,7 @@ Feature: Web series - GraphQL data service API
     Examples: 
       | LocationName | LocationType | LocationDimension | CharacterName | CharacterType | CharacterStatus | CharecterSpecies | CharecterGender | EpisodeName | EpisodeAirDate | EpisodeID |
       | Goutham City | Fictional    | 100Sq KM          | Bat Man       | Hero          | Alive           | Human            | Male            | Dark Born   | 05-Jan-1998    |       007 |
-
+@GQL
   Scenario Outline: TS02 - Verify Graph QL data using data query service
     Given Verify the query data file and intiate the process
     When Procced the GQL flow based on data create through mutation
