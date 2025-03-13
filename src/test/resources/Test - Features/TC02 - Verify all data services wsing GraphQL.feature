@@ -1,6 +1,6 @@
-@GML
 Feature: Series Character & Episodes - GraphQL API services
 
+  @GML
   Scenario Outline: TS01 - Verify mutation process of Graph QL data service
     Given Verify the mutation data file and truncate the old file
     #Prepare the GQL Mutaion with data
